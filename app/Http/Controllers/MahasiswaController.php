@@ -33,6 +33,7 @@ class MahasiswaController extends Controller
         }
     }
 
+    //fungsi create
     public function create(request $request){
         $mahasiswa = new mahasiswa;
         // $mahasiswa->nim = $request->nim;
