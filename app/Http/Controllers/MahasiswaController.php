@@ -13,11 +13,22 @@ class MahasiswaController extends Controller
 
     }
 
+    public function testing($id){
+        $users = DB::table('mahasiswas')->where([
+            ['id', '=', '1']
+        ])->get();
+        return $users->count();
+    }
+
     public function scoringBeasiswa(request $request, $id)
     {
         $IPK_Scroring = 3.5;
         $GajiOrtu = 4000000;
         // Get Mahasiswa By Id
+        $mhs = DB::table('mahasiswas')->where([
+            ['id', '=', $id]
+        ])->get();
+        
         //get data mahasiswa by mahasiswaid ->$check_mhs
         $check_mhs = mahasiswa::find($id);
         // code......
@@ -69,12 +80,4 @@ class MahasiswaController extends Controller
 
         return "Data Berhasil di Hapus";
     }
-
-    public function testing($id){
-        $users = DB::table('mahasiswas')->where([
-            ['id', '=', $id]
-        ])->get();
-        return $users;
-    }
-
 }
