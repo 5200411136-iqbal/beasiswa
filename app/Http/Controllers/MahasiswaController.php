@@ -11,6 +11,28 @@ class MahasiswaController extends Controller
         return mahasiswa::all();
     }
 
+    public function scoringBeasiswa(request $request, $id)
+    {
+        $IPK_Scroring = 3.5;
+        $GajiOrtu = 4000000;
+        // Get Mahasiswa By Id
+        //get data mahasiswa by mahasiswaid ->$check_mhs
+        $check_mhs = mahasiswa::find($id);
+        // code......
+
+        //cek mahasiswa ada atau tidak
+        if($check_mhs = 0){
+            return "Data Mhs tidak ada";
+        }else{
+            //mahasiswa ada
+            if(($check_mhs->ipk >= $IPK_Scroring) and ($check_mhs->gaji_ortu <= $GajiOrtu)){
+                return "Mahasiswa ".$check_mhs->nama." dengan NIM ".$check_mhs->nim." memenuhi syarat mendapatkan beasiswa";
+            }else{
+                return "Mahasiswa ".$check_mhs->nama." dengan NIM ".$check_mhs->nim." TIDAK memenuhi syarat mendapatkan beasiswa";
+            }
+        }
+    }
+
     public function create(request $request){
         $mahasiswa = new mahasiswa;
         // $mahasiswa->nim = $request->nim;
@@ -39,7 +61,7 @@ class MahasiswaController extends Controller
     }
 
     public function delete($id){
-        $mahasiswa = mahasiswa::find($idd);
+        $mahasiswa = mahasiswa::find($id);
         $mahasiswa->delete();
 
         return "Data Berhasil di Hapus";
