@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\mahasiswa;
+use Illuminate\Support\Facades\DB;
 
 class MahasiswaController extends Controller
 {
     public function index(){
         return mahasiswa::all();
+
     }
 
     public function scoringBeasiswa(request $request, $id)
@@ -21,7 +23,7 @@ class MahasiswaController extends Controller
         // code......
 
         //cek mahasiswa ada atau tidak
-        if($check_mhs = 0){
+        if($check_mhs = []){
             return "Data Mhs tidak ada";
         }else{
             //mahasiswa ada
@@ -46,10 +48,10 @@ class MahasiswaController extends Controller
     }
 
     public function update(request $request, $id){
-        $mahasiswa->nim = $request->nim;
-        $mahasiswa->nama = $request->nama;
-        $mahasiswa->ipk = $request->ipk;
-        $mahasiswa->gaji_ortu = $request->gaji_ortu;
+        // $mahasiswa->nim = $request->nim;
+        // $mahasiswa->nama = $request->nama;
+        // $mahasiswa->ipk = $request->ipk;
+        // $mahasiswa->gaji_ortu = $request->gaji_ortu;
 
         $mahasiswa = mahasiswa::find($id);
         $mahasiswa->nim = $request->nim;
@@ -66,5 +68,12 @@ class MahasiswaController extends Controller
         $mahasiswa->delete();
 
         return "Data Berhasil di Hapus";
+    }
+
+    public function testing($id){
+        $users = DB::table('mahasiswas')->where([
+            ['id', '=', $id]
+        ])->get();
+        return $users;
     }
 }

@@ -23,3 +23,5 @@ Route::get('mahasiswa', 'MahasiswaController@index');
 Route::post('mahasiswa','MahasiswaController@create');
 Route::put('/mahasiswa/{id}','MahasiswaController@update');
 Route::delete('/mahasiswa/{id}','MahasiswaController@delete');
+
+Route::post('/mahasiswa/{id}', 'MahasiswaController@testing');
