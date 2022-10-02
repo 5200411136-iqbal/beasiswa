@@ -76,4 +76,11 @@ class MahasiswaController extends Controller
         ])->get();
         return $users;
     }
+
+    public function testing2($id){
+        $users = DB::table('mahasiswas')->where([
+            ['id', '=', $id]
+        ])->get();
+        return $users;
+    }
 }
